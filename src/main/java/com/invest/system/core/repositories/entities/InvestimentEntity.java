@@ -32,4 +32,7 @@ public class InvestimentEntity {
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<IncomeEntity> incomes;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<ContributionEntity> contributions;
 }
