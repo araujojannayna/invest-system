@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Table(name = "investiment")
@@ -26,5 +27,9 @@ public class InvestimentEntity {
 
     private String name;
 
+    @Column(name = "invested_value")
     private Double value;
+
+    @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<IncomeEntity> incomes;
 }
