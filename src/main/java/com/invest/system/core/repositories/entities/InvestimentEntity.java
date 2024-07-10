@@ -1,5 +1,7 @@
 package com.invest.system.core.repositories.entities;
 
+import com.invest.system.core.domain.investiment.InvestimentRequestDTO;
+import com.invest.system.core.domain.investiment.InvestimentResponseDTO;
 import com.invest.system.core.domain.investiment.InvestimentType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,4 +37,18 @@ public class InvestimentEntity {
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ContributionEntity> contributions;
+
+    public InvestimentEntity requestDtoToEntity(InvestimentRequestDTO dto){
+        InvestimentEntity entity = new InvestimentEntity();
+        entity.setName(dto.name());
+        entity.setType(dto.type());
+        entity.setValue(dto.value());
+
+        return entity;
+    }
+
+    public InvestimentResponseDTO entityToResponseDto(){
+        return new InvestimentResponseDTO(this.id.toString(),
+                                                this.type, this.name, this.value);
+    }
 }
